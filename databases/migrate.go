@@ -1,0 +1,4 @@
+package databases
+
+func AutoMigrate() {
+}
