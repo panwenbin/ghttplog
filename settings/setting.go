@@ -6,7 +6,10 @@ import (
 	"os"
 )
 
-var MongodbUri string
+var (
+	MongodbUri      string
+	MongodbDatabase string
+)
 
 var Debug bool
 
@@ -19,6 +22,7 @@ func checkEnv() {
 	_ = godotenv.Load()
 	needChecks := []string{
 		"MONGODB_URI",
+		"MONGODB_DATABASE",
 	}
 
 	for _, envKey := range needChecks {
@@ -30,6 +34,7 @@ func checkEnv() {
 
 func LoadSetting() {
 	MongodbUri = os.Getenv("MONGODB_URI")
+	MongodbDatabase = os.Getenv("MONGODB_DATABASE")
 
 	debug := os.Getenv("DEBUG")
 	if debug != "" && debug != "false" && debug != "0" {
