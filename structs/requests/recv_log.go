@@ -6,6 +6,7 @@ import (
 	"net/http"
 	"regexp"
 	"strings"
+	"time"
 )
 
 type RecvLog struct {
@@ -15,6 +16,7 @@ type RecvLog struct {
 	RequestBody    string      `json:"request_body"`
 	ResponseHeader http.Header `json:"response_header"`
 	ResponseBody   string      `json:"response_body"`
+	Group          string      `json:"group"`
 }
 
 func (r RecvLog) ToHttp() entities.Http {
@@ -24,6 +26,8 @@ func (r RecvLog) ToHttp() entities.Http {
 		RequestHeader:  r.RequestHeader,
 		RequestBody:    r.RequestBody,
 		ResponseHeader: r.ResponseHeader,
+		Group:          r.Group,
+		LogAt:          time.Now(),
 	}
 
 	rBody := r.ResponseBody
