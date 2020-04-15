@@ -7,8 +7,9 @@ import (
 )
 
 var (
-	MongodbUri      string
-	MongodbDatabase string
+	MongodbUri        string
+	MongodbDatabase   string
+	MongodbCollection string
 )
 
 var Debug bool
@@ -35,6 +36,10 @@ func checkEnv() {
 func LoadSetting() {
 	MongodbUri = os.Getenv("MONGODB_URI")
 	MongodbDatabase = os.Getenv("MONGODB_DATABASE")
+	MongodbCollection = os.Getenv("MONGODB_COLLECTION")
+	if MongodbCollection == "" {
+		MongodbCollection = "http"
+	}
 
 	debug := os.Getenv("DEBUG")
 	if debug != "" && debug != "false" && debug != "0" {

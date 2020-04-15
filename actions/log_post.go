@@ -22,7 +22,7 @@ func LogPost(c *gin.Context) {
 	}
 
 	h := recvLog.ToHttp()
-	collection := databases.Mongo.Database(settings.MongodbDatabase).Collection("http")
+	collection := databases.Mongo.Database(settings.MongodbDatabase).Collection(settings.MongodbCollection)
 	ctx, _ := context.WithTimeout(context.Background(), 5*time.Second)
 	res, err := collection.InsertOne(ctx, h)
 	if err != nil {
